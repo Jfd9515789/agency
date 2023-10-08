@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Destinations en cours{% endblock %}
+
+{% block body %}
+    <main class="container destination">
+        <section id="detail">
+            <h2 class="my-5">{{ destination.name }}</h2>
+            {# TABS #}
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#profil">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#details">Détail</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#activités">Activités</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab"
+                       href="#comments">Commentaires</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#postcomments">Postez un commentaire</a>
+                </li>
+            </ul>
+            {# Contents #}
+            <div id="myTabContent" class="tab-content my-4">
+                <div class="tab-pane fade show active" id="profil">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="{{ asset('img/destinations/') ~ destination.image }}"
+                                 alt="{{ destination.name }}"
+                                 style="border : 2px solid #000000;box-shadow:8px 8px 10px 0 rgba(0,0,0,0.5);">
+                        </div>
+                        <div class="col-md-7">
+                            <h4>Description courte :</h4>
+                            <p>{{ destination.smallDescription }}</p>
+                            <h4>Informations :</h4>
+                            <p class="description">
+                                Voyage prévu pour le {{ destination.createdAt|date('d/m/Y') }}<br>
+                                Prix: {{ destination.price }}&euro; pour tous les étudiants<br>
+                                Province: {{ destination.province.name }}<br>
+                                Horaire: {{ destination.schedule }}<br>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="details">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="{{ asset('img/destinations/') ~ destination.image }}"
+                                 alt="{{ destination.name }}"
+                                 style="border : 2px solid #000000;box-shadow:8px 8px 10px 0 rgba(0,0,0,0.5);">
+                        </div>
+                        <div class="col-md-7">
+                            <h3>Description complète :</h3>
+                            <p class="lead">{{ destination.fullDescription|raw }}</p>
+                            <p><a href="{{ asset('img/pdf/') ~ destination.program }}" class="btn btn-primary">Programme
+                                    en PDF</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="activités">
+                    <h3>Listes des activités associées :</h3>
+                    <div class="row">
+                        <ul class="list-group">
+                            <li class="list-group-item">Jeu de pistes</li>
+                            <li class="list-group-item">Football</li>
+                            <li class="list-group-item">Basketball</li>
+                        </ul>
+                    </div>
+                    <br>
+                    <p><a href="{{ path('activities') }}" class="btn btn-primary">Ensemble des activités</a></p>
+                </div>
+                <div class="tab-pane fade" id="comments">
+
+                    {% if destination.comments|length == 0 %}
+                        <h6>Aucun commentaires pour cette destination</h6>
+                    {% else %}
+                        {% if destination.comments|length >= 1 %}
+                            <h5>Nombre de commentaire: <span
+                                        class="badge bg-secondary">{{ destination.comments|length }}</span>
+                            </h5>
+                        {% endif %}
+                        <table class="table striped bordered hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom</th>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Commentaire</th>
+                                <th scope="col">Note</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for comment in destination.comments %}
+                                {% if comment.isPublished == 1 %}
+                                    <tr>
+                                        <th scope="row"><img src="{{ asset('img/avatar/') ~ comment.author.image }}"
+                                                             class="avatar-mini"
+                                                             alt=""></th>
+                                        <td>{{ comment.author.firstName }}</td>
+                                        <td>{{ comment.author.lastName }}</td>
+                                        <td>{{ comment.title|capitalize }}</td>
+                                        <td>{{ comment.comment }}</td>
+                                        <td>{% include 'partials/rating.html.twig' %}</td>
+                                        <td>{{ comment.createdAt|date('d/m/Y') }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            {% for comment in destination.comments %}
+                                {% if comment.isPublished == 0 %}
+                                    <tr>
+                                        <th scope="row"><img src="{{ asset('img/avatar/') ~ comment.author.image }}"
+                                                             class="avatar-mini"
+                                                             alt=""></th>
+                                        <td><p class="text-info">Masqué par un administrateur</p></td>
+                                        <td><p class="text-info">Masqué par un administrateur</p></td>
+                                        <td><p class="text-info">Masqué par un administrateur</p></td>
+                                        <td><p class="text-info">Commentaire masqué par un administrateur</p></td>
+                                        <td><p class="text-info">Masqué par un administrateur</p></td>
+                                        <td><p class="text-info">Masqué par un administrateur</p></td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <hr>
+                        {% if destination.comments|length < 2 %}
+                            <h5>Note moyenne :</h5>
+                            <p>Deux commentaires au minimum sont nécessaires.</p>
+                        {% else %}
+                            {# Note moyenne #}
+                            <h5>Moyenne globale :
+                                {% include 'partials/moyenne.html.twig' %}
+                            </h5>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="tab-pane fade" id="postcomments">
+                    <div class="row">
+                        <div class="col-md-6 offset-3">
+                            {% if is_granted('ROLE_USER') %}
+                                {% if destination.authorcomment(app.user) != null %}
+                                    <h5>Vous avez déjà posté un commentaire pour cette destination</h5>
+                                {% else %}
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form) }}
+                                    <button type="submit" class="btn btn-secondary form-control">Poster</button>
+                                    {{ form_end(form) }}
+                                {% endif %}
+                            {% else %}
+                                <h4>Vous devez être connecté</h4>
+                                <p>&nbsp;</p>
+                                <a href="{{ path('login') }}" class="btn btn-outline-primary">Login</a> <a
+                                    href="{{ path('app_register') }}"
+                                    class="btn btn-outline-primary">S'enregistrer</a>
+                            {% endif %}
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

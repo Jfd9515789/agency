@@ -1,0 +1,79 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ parent() }}users{% endblock %}
+
+{% block body %}
+    <h2 class="my-5 text-muted">Gestion des utilisateurs</h2>
+    <table id="table-admin" class="table table-hover">
+        <thead>
+        <tr>
+            <td>Photo</td>
+            <td>Prénom</td>
+            <td>Nom</td>
+            <td>Email</td>
+            <td>Actions</td>
+            <td>Promotion</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><img src="{{ asset('img/avatar/') ~ user.image }}" alt="{{ user.firstName }}" class="admin-img">
+                </td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <a href="{{ path('admin_new_user', {'id': user.id}) }}" class="btn btn-success"
+                       data-toggle="tooltip" title="Ajouter"><i
+                                class="icofont-ui-add"></i></a>&nbsp;
+                    <a href="{{ path('admin_edit_user', {'id': user.id}) }}" class="btn btn-success"
+                       data-toggle="tooltip" title="Modifier"><i
+                                class="icofont-ui-edit"></i></a>&nbsp;
+                    {% if(user.isDisabled) %}
+                        <a href="{{ path('admin_view_user', {'id': user.id}) }}" class="btn btn-info"
+                           data-toggle="tooltip" title="Masquer"><i
+                                    class="icofont-eye-open"></i></a>
+                    {% else %}
+                        <a href="{{ path('admin_view_user', {'id': user.id}) }}" class="btn btn-info"
+                           data-toggle="tooltip" title="Afficher"><i
+                                    class="icofont-eye-blocked"></i></a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.roles == ['ROLE_USER'] %}
+                        <a href="{{ path('admin_user_promote', {id:user.id, role:"ROLE_ADMIN"}) }}"
+                           class="btn btn-primary" data-toggle="tooltip" title="Promouvoir ADMIN">
+                            A
+                        </a>
+                        <a href="{{ path('admin_user_promote', {id:user.id, role:"ROLE_SUPER_ADMIN"}) }}"
+                           class="btn btn-danger" data-toggle="tooltip" title="Promouvoir SUPER ADMIN">
+                            SA
+                        </a>
+                    {% elseif user.roles == ['ROLE_ADMIN'] %}
+                        <a href="{{ path('admin_user_promote', {id:user.id, role:"ROLE_USER"}) }}"
+                           class="btn btn-warning" data-toggle="tooltip" title="Promouvoir USER">
+                            U
+                        </a>
+                        <a href="{{ path('admin_user_promote', {id:user.id, role:"ROLE_SUPER_ADMIN"}) }}"
+                           class="btn btn-danger" data-toggle="tooltip" title="Promouvoir SUPER ADMIN">
+                            SA
+                        </a>
+                    {% else %}
+                        <a href="{{ path('admin_user_promote', {id:user.id, role:"ROLE_USER"}) }}"
+                           class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="Role utilisateur" data-toggle="tooltip" title="Promouvoir USER">
+                            U
+                        </a>
+                        <a href="{{ path('admin_user_promote', {id:user.id, role:"ROLE_ADMIN"}) }}"
+                           class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="Role administrateur" data-toggle="tooltip" title="Promouvoir ADMIN">
+                            A
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

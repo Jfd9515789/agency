@@ -1,0 +1,16 @@
+{% set NbRating = 0 %}
+
+{% for comment in destination.comments %}
+    {% set  NbRating = NbRating + comment.rating %}
+{% endfor %}
+
+{% if  destination.comments|length > 1 %}
+    {% set moyenne = NbRating / destination.comments|length %}
+    {% for i in 1..5 %}
+        {% if i <= moyenne %}
+            <i class="icofont-star text-primary"></i>
+        {% else %}
+            <i class="icofont-star text-secondary"></i>
+        {% endif %}
+    {% endfor %}
+{% endif %}

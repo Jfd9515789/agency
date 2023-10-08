@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row">
+        <h1 class="visually-hidden">Sidebars examples</h1>
+
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"/>
+                </svg>
+                <span class="fs-4">Menu</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="{{ path('admin_destinations') }}" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#home"/>
+                        </svg>
+                        Destinations
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_comment') }}" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#speedometer2"/>
+                        </svg>
+                        Commentaires
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_activities') }}" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#table"/>
+                        </svg>
+                        Activités
+                    </a>
+                </li>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li>
+                        <a href="{{ path('admin_user') }}" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="#grid"/>
+                            </svg>
+                            Utilisateurs
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+            <hr>
+        </div>
+
+        <div class="col-md-9">

@@ -1,0 +1,54 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <h2 class="my-5 text-muted">Gestion des destinations</h2>
+    <table id="table-admin" class="table table-hover">
+        <thead>
+        <tr>
+            <td>Image</td>
+            <td>Nom</td>
+            <td>Province</td>
+            <td>Prix</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for destination in destinations %}
+            <tr>
+                <td><img src="{{ asset('img/destinations/') ~ destination.image }}" alt="{{ destination.name }}"
+                         class="admin-img">
+                </td>
+                <td>{{ destination.name }}</td>
+                <td>{{ destination.province.name }}</td>
+
+                <td>{{ destination.price|format_currency('EUR') }}</td>
+                <td>
+                    <a href="{{ path('admin_new_destination', {'id': destination.id}) }}" class="btn btn-success"
+                       data-toggle="tooltip" data-placement="top"
+                       title="Ajouter"><i
+                                class="icofont-ui-add" data-toggle="tooltip" data-placement="top"
+                                title="Ajouter"></i></a>&nbsp;
+                    <a href="{{ path('admin_edit_destination', {'id': destination.id}) }}" class="btn btn-success"
+                       data-toggle="tooltip" title="Modifier"><i
+                                class="icofont-ui-edit"></i></a>&nbsp;
+                    <a href="{{ path('admin_del_destination', {'id': destination.id}) }}"
+                       onclick="return confirm('Etes vous sûr ?')" class="text-danger" data-toggle="tooltip"
+                       title="Supprimer"><i
+                                class="icofont-ui-delete"></i></a>&nbsp;
+                    {% if destination.isPublished %}
+                        <a href="{{ path('admin_view_destination', {'id': destination.id}) }}" class="text-info"
+                           data-toggle="tooltip" title="Masquer"><i
+                                    class="icofont-eye-open"></i></a>
+                    {% else %}
+                        <a href="{{ path('admin_view_destination', {'id': destination.id}) }}" class="text-info"
+                           data-toggle="tooltip" title="Afficher"><i
+                                    class="icofont-eye-blocked"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <h2 class="my-5 text-muted">Gestion des activités</h2>
+    <table id="table-admin" class="table table-hover">
+        <thead>
+        <tr>
+            <td>Image</td>
+            <td>Nom</td>
+            <td>Date</td>
+            <td>Modifiée</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for activitie in activities %}
+            <tr>
+                <td><img src="{{ asset('img/news/') ~ activitie.image }}" alt="{{ activitie.name }}"
+                         class="img-news">
+                </td>
+                <td>{{ activitie.name }}</td>
+                <td>{{ activitie.createdAt|date('d/m/Y') }}</td>
+                <td>{{ activitie.updatedAt|date('d/m/Y') }}</td>
+                <td>
+                    <a href="{{ path('admin_new_activitie', {'id': activitie.id}) }}" class="btn btn-success"
+                       data-toggle="tooltip"
+                       title="Ajouter"><i
+                                class="icofont-ui-add"></i></a>&nbsp;
+                    <a href="{{ path('admin_edit_activitie', {'id': activitie.id}) }}" class="btn btn-success"
+                       data-toggle="tooltip"
+                       title="Modifier"><i
+                                class="icofont-ui-edit"></i></a>&nbsp;
+                    <a href="{{ path('admin_del_activities', {'id': activitie.id}) }}"
+                       onclick="return confirm('Etes vous sûr ?')" class="btn btn-danger" data-toggle="tooltip"
+                       title="Supprimer"><i
+                                class="icofont-ui-delete"></i></a>&nbsp;
+                    {% if activitie.isPublished %}
+                        <a href="{{ path('admin_view_activitie', {'id': activitie.id}) }}" class="btn btn-info"
+                           data-toggle="tooltip"
+                           title="Masquer"><i
+                                    class="icofont-eye-open"></i></a>
+                    {% else %}
+                        <a href="{{ path('admin_view_activitie', {'id': activitie.id}) }}" class="btn btn-info"
+                           data-toggle="tooltip"
+                           title="Afficher"><i
+                                    class="icofont-eye-blocked"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Nos destinations{% endblock %}
+
+{% block body %}
+    <!-- Banner -->
+    <div class="banner">
+    </div>
+    <!-- End Banner -->
+
+    <main class="container">
+        <div class="container">
+
+            <h1 class="text-center pt-3">L'ensemble des destinations proposées</h1>
+
+            <div class="filters">
+                <ul class="btn-group simplefilter d-flex p-2">
+                    <li class="btn m-1 fltr-controls btn-primary badge-pill" data-filter="all">Toutes</li>
+                    {% for province in provinces %}
+                        <li data-filter="{{ province.id }}"
+                            class="btn btn-outline-primary"> {{ province.name }} </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="additional p-2 d-flex justify-content-between">
+                    <!-- To create a search control -->
+                    <div class="input-group pl-2 pr-2">
+                        <input type="text" class="form-control fltr-controls" name="filtr-search" value=""
+                               placeholder="Votre recherche" data-search>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-12 filter-container">
+                {% for destination in destinations %}
+                    <div class="col-md-4 filtr-item" data-category="{{ destination.province.id }}" data-sort="value">
+                        <div class="card m-3" style="min-height: 480px !important;">
+                            <div class="card-header bg-light">
+                                <h5 class="text-center">{{ destination.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <img alt="" src="{{ asset('img/destinations/') ~ destination.image }}">
+                                <p class="card-text">
+                                <p>{{ destination.smallDescription }}</p>
+                                <div class="text-center">
+                                    <a class="btn btn-primary btn-sm"
+                                       href="{{ path('destination', {'slug': destination.slug}) }}">Voir cette
+                                        destination</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </main>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let filterizd = $('.filter-container').filterizr({
+            // options here
+        });
+    </script>
+{% endblock %}

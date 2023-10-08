@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche User de {{ app.user.firstName }} {{ app.user.lastName }}{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="display-4 my-4">Fiche de l'utilisateur</h2>
+                    </div>
+                    <div class="card" style="width: 15rem;">
+                        <img src="{{ asset('img/avatar/') ~ app.user.image }}" class="card-img-top"
+                             alt="" style="height: 150px; width: 150px; filter: drop-shadow(10px 10px 4px #1a1a64);">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong> {{ app.user.firstName }} {{ app.user.lastName }}</strong></li>
+                            <li class="list-group-item"><strong>Dernière connexion</strong>
+                                : {{ app.user.lastlogAt|date('d/m/Y') }}</li>
+                            <li class="list-group-item"><strong>Rôle :</strong>
+                                {% if app.user.roles == ['ROLE_USER'] %}
+                                    Utilisateur
+                                {% elseif app.user.roles == ['ROLE_ADMIN'] %}
+                                    Administrateur
+                                {% else %}
+                                    Super Administrateur
+                                {% endif %}
+                            </li>
+                            <li class="list-group-item"><strong>Email</strong> : {{ app.user.email }}</li>
+                        </ul>
+                    </div>
+
+                    <div class="col">
+                        <div>
+                            {% if app.user.comments is empty %}
+                            <h5 class="text-start mx-3">Il/Elle n'a pas posté de commentaires</h5>
+                            {% else %}
+                            <table class="table" id="table-admin">
+                                <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Nom</th>
+                                    <th>Titre</th>
+                                    <th>Date</th>
+                                    <th>Contenu</th>
+                                    <th>Evaluation</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for comment in app.user.comments %}
+                                    <tr>
+                                        <td><img src="{{ asset('img/destinations/') ~ comment.destination.image }}"
+                                                 alt="comment.destination.name" class="img-news"
+                                                 style="cursor: pointer;"></td>
+                                        <td>{{ comment.destination.name }}</td>
+                                        <td>{{ comment.title }}</td>
+                                        <td>{{ comment.createdAt|date('d/m/Y') }}</td>
+                                        <td>{{ comment.comment }}</td>
+                                        <td>{% include 'partials/rating.html.twig' %}</p></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

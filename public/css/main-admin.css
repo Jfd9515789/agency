@@ -1,0 +1,48 @@
+/* Menu */
+.accordion-item i {
+    padding-right: 10px;
+}
+
+/* Courses */
+.admin-img {
+    width: 50px;
+}
+
+table a {
+    padding-right: 4px;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.row {
+
+}
+
+@media only screen and (min-width: 600px) {
+    /* NAVBAR */
+    .navbar-nav {
+
+    }
+
+    /* SIDEBAR */
+    .row {
+
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    /* NAVBAR */
+    .navbar-nav {
+
+    }
+
+    /* SIDEBAR */
+    .row {
+
+    }
+}

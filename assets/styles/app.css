@@ -1,0 +1,205 @@
+/* CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+
+}
+
+.home-news a {
+    color: #325D88;
+    text-decoration: none;
+}
+
+.button input {
+    border: none;
+    background-color: gray;
+    padding: 20px;
+    margin: 20px;
+    width: 150px;
+}
+
+/* Filterizer */
+.filtr-item img {
+    width: 100%;
+    height: 200px;
+    filter: grayscale(100%);
+}
+
+.filter-container {
+    margin: 0;
+}
+
+.filtr-title {
+    position: absolute;
+    bottom: 20px;
+    padding: 5px;
+    background: #e3e3e3;
+}
+
+.controls-filter {
+    margin-bottom: 26px;
+    color: red;
+}
+
+.alert {
+    margin-bottom: 0;
+}
+
+/* Form login */
+.login-form {
+    min-height: 70vh;
+}
+
+/* avatars dropdown */
+.avatar-mini {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.avatar-teacher {
+    width: 50px;
+}
+
+.img-news {
+    width: 100px;
+}
+
+.img-avatar {
+    margin: 20px;
+    border-radius: 8px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.vich-image img {
+    width: 120px;
+}
+
+.container-footer {
+    background-color: #090303;
+}
+
+.social-part .fa {
+    padding-right: 20px;
+}
+
+ul li a {
+    margin-right: 20px;
+}
+
+.name {
+    color: blue;
+}
+
+.work {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.about span {
+    font-size: 13px;
+}
+
+.v-profile {
+    color: blue;
+    cursor: pointer;
+}
+
+.box {
+    -webkit-box-shadow: 13px 12px 5px -10px rgba(196, 194, 196, 0.72);
+    -moz-box-shadow: 13px 12px 5px -10px rgba(196, 194, 196, 0.72);
+    box-shadow: 13px 12px 5px -10px rgba(196, 194, 196, 0.72);
+}
+
+.col-md-3 {
+    margin-top: 10px;
+}
+
+.card {
+    height: 300px;
+    border: 0;
+    padding: 15px;
+}
+
+.w-100 img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.w-100 img:hover {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+@media screen and (min-width: 700px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        line-height: 15px;
+        color: white;
+        width: 100%;
+        opacity: 1;
+    }
+
+    .brand-title {
+        font-size: 1.5rem;
+        margin: .5rem;
+    }
+
+    .navbar-links {
+        background-color: #2b2828;
+        height: 100%;
+        display: flex;
+    }
+
+    .navbar-links ul {
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar-links li {
+        list-style: none;
+    }
+
+    .navbar-links a {
+        display: block;
+        text-decoration: none;
+        padding: 0.3rem;
+        font-size: 1em;
+        color: #fff;
+    }
+
+    .toggle-button1 {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+
+}

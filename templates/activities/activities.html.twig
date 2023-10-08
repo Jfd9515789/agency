@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Activités{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <section class="row">
+            <section class="jumbotron text-lg-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">Activités extrascolaires</h1>
+                    <p class="lead text-muted">Une activité extrascolaire est un loisir qui se pratique en-dehors du
+                        temps scolaire. Il peut s'agir d'une activité sportive, musicale, culturelle, manuelle ou
+                        artistique. Il est important de bien la choisir en fonction de l'âge et des goûts de
+                        l'enfant. Même si elle prend du temps après l’école, une activité extrascolaire peut avoir
+                        beaucoup de bienfaits.</p>
+                </div>
+            </section>
+            <h1 class="fw-light text-center text-lg-start mt-4 mb-0">L'ensemble des activités proposées</h1>
+            <hr class="mt-2 mb-5">
+            <div class="row text-center text-lg-start">
+                {% for activitiemonths in activitiesmonths %}
+                    {% if activitiemonths.isPublished == 1 %}
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <img class="img-thumbnail" src="{{ asset('img/news/' ~ activitiemonths.image) }}"
+                                 alt=""
+                                 style="padding: 5px;border: 1px solid #ddd; height: 270px; cursor: pointer;">
+                            <h5>{{ activitiemonths.name }}</h5>
+                            <p style="width: 100%;">{{ activitiemonths.content }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

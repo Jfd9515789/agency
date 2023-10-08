@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Teacher{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="album py-5 bg-light">
+                    <div class="container">
+                        <table class="table" id="table-admin">
+                            <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for professeur in professeurs %}
+                                <tr>
+                                    <td><a href=""><img src="{{ asset('img/avatar/' ~ professeur.image) }}"
+                                                        class="img-news"
+                                                        alt="{{ professeur.firstName }}"></a></td>
+                                    <td>{{ professeur.firstName }}</td>
+                                    <td>{{ professeur.lastName }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

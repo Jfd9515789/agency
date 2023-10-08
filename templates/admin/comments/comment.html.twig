@@ -1,0 +1,49 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ parent() }}comments{% endblock %}
+
+{% block body %}
+    <h2 class="my-5 text-muted">Gestion des commentaires</h2>
+    <table id="table-admin" class="table table-hover">
+        <thead>
+        <tr>
+            <th>Auteur</th>
+            <th>Destinations</th>
+            <th>Date</th>
+            <th>Note</th>
+            <th>Commentaire</th>
+            <th>Titre</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.author.firstName }} {{ comment.author.lastName }}</td>
+                <td>{{ comment.destination.name }}</td>
+                <td>{{ comment.destination.createdAt|date('d/m/Y') }}</td>
+                <td>{{ comment.rating }}</td>
+                <td>{{ comment.comment }}</td>
+                <td>{{ comment.title }}</td>
+                <td>
+                    <a href="{{ path('admin_del_comment', {'id': comment.id}) }}"
+                       onclick="return confirm('Etes vous sûr ?')"
+                       class="btn btn-danger" data-toggle="tooltip"
+                       title="Supprimer"><i
+                                class="icofont-ui-delete"></i></a>&nbsp;
+                    {% if comment.isPublished %}
+                        <a href="{{ path('admin_view_comment', {'id': comment.id}) }}" class="btn btn-info"
+                           data-toggle="tooltip"
+                           title="Masquer"><i
+                                    class="icofont-eye-open"></i></a>
+                    {% else %}
+                        <a href="{{ path('admin_view_comment', {'id': comment.id}) }}" class="btn btn-info"
+                           data-toggle="tooltip"
+                           title="Afficher"><i
+                                    class="icofont-eye-blocked"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

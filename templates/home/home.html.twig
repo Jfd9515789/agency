@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Page Home{% endblock %}
+
+{% block body %}
+
+    <!-- Slider -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ asset('img/slider/slider01.jpg') }}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/slider/slider02.jpg') }}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/slider/slider03.jpg') }}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+    <!-- End Slider -->
+
+    <main class="container">
+        <!-- START THE FEATURETTES -->
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading fw-normal lh-1"
+                    style="font-size: 35px; color: #212815; font-style: italic;">Nos voyages
+                    scolaires éducatifs</h2>
+                <p class="lead">Quoi de mieux qu’un voyage pendant l’année scolaire pour découvrir de nouvelles
+                    cultures et apprendre des autres ? En plus d’une expérience unique, les voyages scolaires permettent
+                    aux élèves d’éveiller leur curiosité et de s’instruire tout en s’amusant. Voyager apporte une autre
+                    approche de la vie et partir en groupe vers de nouveaux horizons apportera aux élèves une ouverture
+                    vers le monde et leur permettra ainsi d’en devenir les acteurs de demain.</p>
+                <p class="lead">Nous sommes persuadés qu’un séjour scolaire réussi dépend d’une bonne organisation. Pour
+                    cela, nous mettons en œuvre tous nos moyens afin de construire une expérience éducative et
+                    culturelle qui regroupe toutes vos espérances, tout cela bien sûr dans la sécurité et la sérénité.
+                    Nous sommes disponibles à tout moment.</p>
+            </div>
+            <div class="col-md-5">
+                <img src="{{ asset('img/destinations/3.jpg') }}" alt="" width="500" height="500"
+                     class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+                     style="filter: drop-shadow(10px 10px 4px #1a1a64);">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading fw-normal lh-1"
+                    style="font-size: 35px; color: #212815;font-style: italic;">Des voyages
+                    scolaires dans toute la
+                    Belgique</h2>
+                <p class="lead">AGSENSE propose des dizaines de destinations différentes, permettant ainsi à
+                    chaque établissement scolaire de trouver le voyage qui lui correspond. Nous pourrons vous guider
+                    dans votre
+                    choix de sortie scolaire ou classe découverte selon vos exigences, celles des organisateurs et de la
+                    direction.</p>
+                <p class="lead">
+                    Nous proposons plusieurs types de voyages scolaires dans de multiples destinations :
+                    voyage rhéto,
+                    excursion d’un jour, voyage culturel et pédagogique et séjours linguistiques.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img src="{{ asset('img/destinations/4.jpg') }}" alt="" width="500" height="500"
+                     class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style="
+                     filter: drop-shadow(10px 10px 4px #1a1a64);">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading fw-normal lh-1"
+                    style="font-size: 35px; color: #212815;font-style: italic;">Vos voyages
+                    scolaires en toute sérénité</h2>
+                <p class="lead">AGSENSE propose pour les écoles des séjours pédagogiques dans toute la Belgique. Tout
+                    cela pour
+                    une qualité et prix hors du commun. Les prix des séjours dépendent : des
+                    dates choisies, du nombre de participants et de la formule choisie. Mais nous vous assurons le
+                    meilleur prix, en respectant de nombreux critères.</p>
+                <p class="lead">Depuis juin 2012, nous nous sommes agrandis pour pouvoir vous satisfaire davantage. Nous
+                    avons ouvert notre agence de voyages où nous vous y proposons aussi bien des voyages brochures de
+                    grands Tours Opérateurs que des voyages à la carte et diverses excursions.</p>
+            </div>
+            <div class="col-md-5">
+                <img src="{{ asset('img/destinations/5.jpg') }}" alt=""
+                     class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="800"
+                     height="800" style="
+                     filter: drop-shadow(10px 10px 4px #1a1a64);cursor: pointer;">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 m-auto">
+                <div class="section-heading">
+                    <h4 class="section-title" style="text-align: center;font-size: 45px;color: #37461c; padding: 25px;">
+                        Nos trois destinations favorites</h4>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for destination in destinations|slice(0, 3) %}
+                <div class="col-lg-4 col-sm-6 col-md-4">
+                    <div class="blog-block">
+                        <img src="{{ asset('img/destinations/') ~ destination.image }}" alt="" class="w-100" style="
+                     filter: drop-shadow(10px 10px 4px #1a1a64);max-width: 100%; height: auto; padding-top: 10px;">
+                        <div class="blog-text">
+                            <br>
+                            <h5>{{ destination.name }}</h5>
+                            <p>{{ destination.smallDescription }}
+                            </p>
+                            <a class="btn btn-primary btn-sm"
+                               href="{{ path('destination', {'slug': destination.slug}) }}">Voir cette
+                                destination</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

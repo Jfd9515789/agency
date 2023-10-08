@@ -1,0 +1,97 @@
+.banner {
+    height: 300px;
+    background: url("../img/banner/ban03.jpg") no-repeat;
+    background-size: cover;
+    filter: grayscale(100%);
+}
+
+/* HEADER */
+header {
+    position: fixed;
+    z-index: 4;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 20px;
+    line-height: 45px;
+    background-color: #2b2828;
+    color: #fff;
+    opacity: 1;
+}
+
+header img {
+    width: 80px;
+    height: 80px;
+}
+
+header a {
+    color: #d0d8e1;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: #d0d8e1;
+    text-decoration: none;
+}
+
+.row h1 {
+    text-align: center;
+}
+
+.brand-title {
+    font-size: 1.9rem;
+    margin: .5rem;
+}
+
+/* NAV */
+
+.navbar-links {
+    align-self: center;
+    height: 100%;
+    display: none;
+}
+
+.navbar-links ul {
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    list-style-type: none;
+    text-align: center;
+}
+
+.navbar-links a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: .2rem 0.5rem;
+}
+
+.navbar-links.active {
+    display: flex;
+}
+
+.toggle-button1 {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 35px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.toggle-button1 .bar {
+    height: 4px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
